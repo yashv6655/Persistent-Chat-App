@@ -42,12 +42,15 @@ io.on("connection", (socket) => {
 
     socket.join(user.room);
 
-    //socket.emit("message", generateMessage("Admin", "Welcome.", user.room));
+    // socket.emit(
+    //   "message",
+    //   generateMessage("Pertivo", "Welcome To Pertivo's Chat Box", user.room)
+    // );
     socket.broadcast
       .to(user.room)
       .emit(
         "message",
-        generateMessage("Admin", `${user.username} has joined.`, user.room)
+        generateMessage("Pertivo", `${user.username} has joined.`, user.room)
       );
     io.to(user.room).emit("roomData", {
       room: user.room,

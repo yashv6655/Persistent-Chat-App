@@ -14,32 +14,34 @@
 <body>
     <div class="centered-form">
         <div class="centered-form__box">
-            <h1>Join</h1>
+            <h3>Chat Box</h3>
 
             <!-- Join Room -->
             <form action="/chat.html">
                 <label>Display name</label>
                 <input type="text" name="username" placeholder="Display name" required>
-                <label>Room</label>
-                <input type="text" id="room" name="room" placeholder="Room" required>
+                <label hidden>Room</label>
+                <input type="text" id="room" name="room" placeholder="Room" hidden readonly required>
                 <button>Join</button>
             </form>
             <!-- End of join room -->
 
             <!-- Code Creation -->
             <div>
-                <h1 class="mt-5">Create Code</h1>
-                <textarea type="text" class="form-control" id="room-code" aria-label="readonly input example" readonly>
+                <button class="mt-5" id="code-btn" onclick="generateRoomCode()">
+                    Generate Link
+                </button>
+                <textarea type="text" class="form-control mt-2" id="room-code" aria-label="readonly input example"
+                    readonly>
                 </textarea>
-                <button class="mt-1">
-                    <span onclick="myFunction()" onmouseout="outFunc()" class="btn text-white" id="myTooltip">Copy
-                        to
-                        clipboard</span>
+                <button class="mt-2">
+                    <span onclick="myFunction()" onmouseout="outFunc()" class="btn text-white"
+                        id="myTooltip"><small>Copy link
+                            to
+                            clipboard</small></span>
                 </button>
 
-                <button class="mt-1" id="code-btn" onclick="generateRoomCode()">
-                    Create Code
-                </button>
+                <small class="small-text">Share this link with others you want to invite</small>
             </div>
             <!-- End of code creation -->
 
@@ -59,7 +61,7 @@
 
         function outFunc() {
             var tooltip = document.getElementById("myTooltip");
-            tooltip.innerHTML = "Copy to clipboard";
+            // tooltip.innerHTML = "Copy link to clipboard";
         }
     </script>
     <!-- End of clipboard functionality -->
