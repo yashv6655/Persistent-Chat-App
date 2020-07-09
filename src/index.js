@@ -3,6 +3,7 @@ const http = require("http");
 const express = require("express");
 const socketio = require("socket.io");
 const Filter = require("bad-words");
+const mongoose = require("mongoose");
 const cors = require("cors");
 require("./db");
 const {
@@ -15,6 +16,7 @@ const {
   getUser,
   getUsersInRoom,
 } = require("./utils/users");
+const { Room } = require("./models/roomModel");
 
 const app = express();
 const server = http.createServer(app);
@@ -55,6 +57,15 @@ io.on("connection", (socket) => {
     io.to(user.room).emit("roomData", {
       room: user.room,
       users: getUsersInRoom(user.room),
+    });
+
+    Room.findOne({ roomCode: user.room }, (err, doc) => {
+      if (err) throw err;
+
+      let roomMessages = (usernames = messages = timesSent = []);
+      roomMessages = doc.messages;
+
+      io.to(user.room).emit("getMessages", roomMessages);
     });
 
     callback();
