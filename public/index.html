@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Chat App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="/css/styles.css">
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+        integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="centered-form">
+        <div class="centered-form__box">
+            <h1>Join</h1>
+
+            <!-- Join Room -->
+            <form action="/chat.html">
+                <label>Display name</label>
+                <input type="text" name="username" placeholder="Display name" required>
+                <label>Room</label>
+                <input type="text" id="room" name="room" placeholder="Room" required>
+                <button>Join</button>
+            </form>
+            <!-- End of join room -->
+
+            <!-- Code Creation -->
+            <div>
+                <h1 class="mt-5">Create Code</h1>
+                <textarea type="text" class="form-control" id="room-code" aria-label="readonly input example" readonly>
+                </textarea>
+                <button class="mt-1">
+                    <span onclick="myFunction()" onmouseout="outFunc()" class="btn text-white" id="myTooltip">Copy
+                        to
+                        clipboard</span>
+                </button>
+
+                <button class="mt-1" id="code-btn" onclick="generateRoomCode()">
+                    Create Code
+                </button>
+            </div>
+            <!-- End of code creation -->
+
+        </div>
+    </div>
+    <!-- Clipboard functionality -->
+    <script>
+        function myFunction() {
+            var copyText = document.getElementById("room-code");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            document.execCommand("copy");
+
+            var tooltip = document.getElementById("myTooltip");
+            tooltip.innerHTML = "Copied";
+        }
+
+        function outFunc() {
+            var tooltip = document.getElementById("myTooltip");
+            tooltip.innerHTML = "Copy to clipboard";
+        }
+    </script>
+    <!-- End of clipboard functionality -->
+
+    <!-- Random Code Generation -->
+    <script>
+        function generateRoomCode() {
+            var input = document.getElementById("room-code");
+            var room = document.getElementById("room");
+            var result = '';
+            var length = 30;
+            var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            var charactersLength = characters.length;
+            for (var i = 0; i < length; i++) {
+                result += characters.charAt(Math.floor(Math.random() * charactersLength));
+            }
+            input.value = result;
+            room.value = result;
+        }
+    </script>
+    <!-- End of Random Code Generator -->
+
+</body>
+
+</html>
