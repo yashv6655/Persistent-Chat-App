@@ -60,10 +60,20 @@ io.on("connection", (socket) => {
     });
 
     Room.findOne({ roomCode: user.room }, (err, doc) => {
+      let roomMessages = [];
       if (err) throw err;
-
-      let roomMessages = (usernames = messages = timesSent = []);
-      roomMessages = doc.messages;
+      // Check and see if room exists
+      if (doc === null) {
+        roomMessages = [
+          {
+            username: "Pertivo",
+            message: "Hello. This is Pertivo's Chat Box",
+            timeSent: "",
+          },
+        ];
+      } else {
+        roomMessages = doc.messages;
+      }
 
       io.to(user.room).emit("getMessages", roomMessages);
     });
@@ -104,7 +114,7 @@ io.on("connection", (socket) => {
     if (user) {
       io.to(user.room).emit(
         "message",
-        generateMessage("Admin", `${user.username} has left.`, user.room)
+        generateMessage("Pertivo", `${user.username} has left.`, user.room)
       );
       io.to(user.room).emit("roomData", {
         room: user.room,

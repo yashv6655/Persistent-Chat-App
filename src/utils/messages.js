@@ -81,35 +81,35 @@ const generateLocationMessage = (username, url) => {
   };
 };
 
-const getMessages = (roomCode) => {
-  // Crete the message variables
-  let roomMessages = (usernames = messages = timesSent = []);
-  // Find the room based on roomCode
-  Room.findOne(
-    {
-      roomCode,
-    },
-    (err, doc) => {
-      if (err) throw err;
-      else {
-        roomMessages = doc.messages;
+// const getMessages = (roomCode) => {
+//   // Crete the message variables
+//   let roomMessages = (usernames = messages = timesSent = []);
+//   // Find the room based on roomCode
+//   Room.findOne(
+//     {
+//       roomCode,
+//     },
+//     (err, doc) => {
+//       if (err) throw err;
+//       else {
+//         roomMessages = doc.messages;
 
-        for (var i = 0; i < roomMessages.length; i++) {
-          usernames.push(roomMessages[i].username);
-          messages.push(roomMessages[i].message);
-          timesSent.push(roomMessages[i].timeSent);
-        }
-        //console.log(doc);
-        //console.log(roomMessages[1].username);
-      }
-    }
-  );
-  return {
-    usernames,
-    messages,
-    timesSent,
-  };
-};
+//         for (var i = 0; i < roomMessages.length; i++) {
+//           usernames.push(roomMessages[i].username);
+//           messages.push(roomMessages[i].message);
+//           timesSent.push(roomMessages[i].timeSent);
+//         }
+//         //console.log(doc);
+//         //console.log(roomMessages[1].username);
+//       }
+//     }
+//   );
+//   return {
+//     usernames,
+//     messages,
+//     timesSent,
+//   };
+// };
 
 module.exports = {
   generateMessage,
